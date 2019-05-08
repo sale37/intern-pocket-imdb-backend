@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -25,3 +23,4 @@ Route::group([
 });
 
 Route::apiResource('movies', 'Api\MovieController');
+Route::patch('/movies/updateLikeDislike/{movie}', 'Api\MovieController@updateLikeDislike');
