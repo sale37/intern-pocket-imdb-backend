@@ -2,13 +2,17 @@
 
 namespace App;
 
+use CyrildeWit\EloquentViewable\Contracts\Viewable as ViewableContract;
+use CyrildeWit\EloquentViewable\Viewable;
 use Illuminate\Database\Eloquent\Model;
 
 
-class Movie extends Model
+class Movie extends Model implements ViewableContract
 {
+    use Viewable;
+
     protected $fillable = [
-        'likes', 'dislikes'
+        'likes', 'dislikes', 'timesVisited'
     ];
 
     public function users(){

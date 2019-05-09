@@ -43,6 +43,21 @@ class MovieController extends Controller
      */
     public function show(Movie $movie)
     {
+        views($movie)->record();
+
+        $movie->update([
+            'timesVisited' => $movie->timesVisited+1
+        ]);
+
+        return $movie;
+    }
+
+    public function update(Request $request, Movie $movie){
+
+        $movie->update($request->all());
+
+        $movie->save();
+
         return $movie;
     }
 
