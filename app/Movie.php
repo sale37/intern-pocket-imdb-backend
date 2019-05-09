@@ -20,4 +20,11 @@ class Movie extends Model implements ViewableContract
         return $this->belongsToMany('App\User', 'movies_users', 'movies_id', 'user_id');
 
     }
+
+    public function comments(){
+
+        return $this->hasMany(Comment::class);
+
+    }
+
 }

@@ -52,6 +52,12 @@ class MovieController extends Controller
         return $movie;
     }
 
+    public function getCommentsForMovie(Movie $movie){
+
+        return $movie->comments;
+
+    }
+
     public function update(Request $request, Movie $movie){
 
         $movie->update($request->all());
