@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMoviesUsersTable2 extends Migration
+class UpdateUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class CreateMoviesUsersTable2 extends Migration
      */
     public function up()
     {
-        Schema::table('movies_users', function (Blueprint $table) {
-            $table->dropColumn('liked_disliked');
+        Schema::table('users', function (Blueprint $table) {
+            $table->boolean('hasLikedDisliked')->default(false);
         });
     }
 
@@ -25,6 +25,6 @@ class CreateMoviesUsersTable2 extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('movies_users');
+        Schema::dropIfExists('users');
     }
 }
