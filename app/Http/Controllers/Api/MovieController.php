@@ -46,10 +46,10 @@ class MovieController extends Controller
         views($movie)->record();
 
         $movie->update([
-            'timesVisited' => $movie->timesVisited+1
+            'times_visited' => $movie->times_visited+1
         ]);
 
-        return $movie;
+        return $movie->load('comments');
     }
 
     public function getCommentsForMovie(Movie $movie){
