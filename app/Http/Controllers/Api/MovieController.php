@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Movie;
+use Dotenv\Exception\ValidationException;
 use Illuminate\Http\Request;
 
 class MovieController extends Controller
@@ -40,9 +41,9 @@ class MovieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Movie $movie)
     {
-        //
+        return $movie;
     }
 
     /**
@@ -52,9 +53,21 @@ class MovieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function updateLikeDislike(Request $request, Movie $movie)
     {
-        //
+        $user = auth()->user();
+
+        if (!$user->movies()->find($movie->id)) {
+            $movie->update($request->all());
+
+            $movie->save();
+
+            $user->movies()->attach($movie);
+
+            return $movie;
+        }else{
+            throw new ValidationException('Already voted');
+        }
     }
 
     /**
