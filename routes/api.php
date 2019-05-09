@@ -24,5 +24,8 @@ Route::group([
 
 Route::apiResource('movies', 'Api\MovieController');
 Route::patch('/movies/updateLikeDislike/{movie}', 'Api\MovieController@updateLikeDislike');
+Route::get('/movies/getComments/{movie}', 'Api\MovieController@getCommentsForMovie');
 
 Route::get('/genres', 'GenreController@index');
+
+Route::apiResource('comments', 'CommentController');
