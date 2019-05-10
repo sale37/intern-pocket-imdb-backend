@@ -55,4 +55,10 @@ class User extends Authenticatable implements JWTSubject
         return $this->belongsToMany('App\Movie', 'movies_users', 'user_id', 'movie_id');
 
     }
+
+    public function watchlists(){
+
+        return $this->hasMany(Watchlist::class);
+
+    }
 }

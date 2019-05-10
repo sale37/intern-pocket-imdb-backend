@@ -29,3 +29,6 @@ Route::get('/movies/{movie}/comments', 'Api\MovieController@getCommentsForMovie'
 Route::get('/genres', 'GenreController@index');
 
 Route::apiResource('comments', 'CommentController');
+
+Route::apiResource('watchlists', 'WatchlistController');
+Route::delete('watchlists/{watchlist}/movies/{movie}', 'WatchlistController@destroyMovieFromWatchlist');

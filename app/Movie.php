@@ -27,4 +27,10 @@ class Movie extends Model implements ViewableContract
 
     }
 
+    public function watchlists(){
+
+        return $this->belongsToMany('App\Watchlist', 'watchlist_movie', 'movies_id', 'watchlist_id');
+
+    }
+
 }
