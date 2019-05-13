@@ -18,7 +18,7 @@ class Watchlist extends Model
 
     public function movies(){
 
-        return $this->belongsToMany('App\Movie', 'watchlist_movie', 'watchlist_id', 'movie_id');
+        return $this->belongsToMany('App\Movie', 'watchlist_movie', 'watchlist_id', 'movie_id')->withPivot('watched');
 
     }
 }

@@ -15,6 +15,8 @@ class Movie extends Model implements ViewableContract
         'likes', 'dislikes', 'timesVisited'
     ];
 
+    protected $appends = ['is_watched'];
+
     public function users(){
 
         return $this->belongsToMany('App\User', 'movies_users', 'movies_id', 'user_id');
@@ -29,7 +31,15 @@ class Movie extends Model implements ViewableContract
 
     public function watchlists(){
 
-        return $this->belongsToMany('App\Watchlist', 'watchlist_movie', 'movies_id', 'watchlist_id');
+        return $this->belongsToMany('App\Watchlist', 'watchlist_movie', 'movie_id', 'watchlist_id')->withPivot('watched');
+
+    }
+
+    public function getIsWatchedAttribute(){
+
+        foreach ($this->watchlists as $watchlsit)
+
+        return $watchlsit->pivot->watched;
 
     }
 

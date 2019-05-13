@@ -32,3 +32,4 @@ Route::apiResource('comments', 'CommentController');
 
 Route::apiResource('watchlists', 'WatchlistController');
 Route::delete('watchlists/{watchlist}/movies/{movie}', 'WatchlistController@destroyMovieFromWatchlist');
+Route::patch('/movies/{movie}/watched', 'Api\MovieController@markAsWatchedUnwatched');

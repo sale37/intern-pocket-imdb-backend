@@ -101,4 +101,19 @@ class MovieController extends Controller
     {
         //
     }
+
+    public function markAsWatchedUnwatched(Movie $movie){
+
+        $ids = $movie->watchlists()->allRelatedIds();
+
+        foreach ($ids as $id){
+            if ($movie->isWatched) {
+                $movie->watchlists()->updateExistingPivot($id, ['watched' => false]);
+            }else{
+                $movie->watchlists()->updateExistingPivot($id, ['watched' => true]);
+            }
+        }
+
+        return $movie;
+    }
 }

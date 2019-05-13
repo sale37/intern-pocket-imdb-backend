@@ -111,7 +111,9 @@ class WatchlistController extends Controller
      */
     public function destroy(Watchlist $watchlist)
     {
+        $watchlist->delete();
 
+        return $watchlist;
     }
 
     public function destroyMovieFromWatchlist(Watchlist $watchlist, Movie $movie){
@@ -123,4 +125,6 @@ class WatchlistController extends Controller
             throw new UnauthorizedException('Cant remove from this watchlist');
         }
     }
+
+
 }
