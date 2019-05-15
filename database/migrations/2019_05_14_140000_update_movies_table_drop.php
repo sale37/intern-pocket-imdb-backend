@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class UpdateMoviesTable extends Migration
+class UpdateMoviesTableDrop extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class UpdateMoviesTable extends Migration
     public function up()
     {
         Schema::table('movies', function (Blueprint $table) {
-            $table->integer('times_visited')->default(0);
+            $table->dropColumn('times_visited');
         });
     }
 

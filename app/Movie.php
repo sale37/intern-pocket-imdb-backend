@@ -43,4 +43,10 @@ class Movie extends Model implements ViewableContract
 
     }
 
+    public function genre(){
+
+        return $this->belongsTo(Genre::class);
+
+    }
+
 }
