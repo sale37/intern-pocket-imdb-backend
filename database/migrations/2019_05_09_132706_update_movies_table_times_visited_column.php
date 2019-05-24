@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AlterMoviesUsersTableDropLikedDislikedColumns extends Migration
+class UpdateMoviesTableTimesVisitedColumn extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AlterMoviesUsersTableDropLikedDislikedColumns extends Migration
      */
     public function up()
     {
-        Schema::table('movies_users', function (Blueprint $table) {
-            $table->dropColumn('liked_disliked');
+        Schema::table('movies', function (Blueprint $table) {
+            $table->renameColumn('timesVisited', 'times_visited');
         });
     }
 
@@ -25,6 +25,6 @@ class AlterMoviesUsersTableDropLikedDislikedColumns extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('movies_users');
+        Schema::dropIfExists('movies');
     }
 }

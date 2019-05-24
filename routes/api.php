@@ -24,5 +24,12 @@ Route::group([
 
 Route::apiResource('movies', 'Api\MovieController');
 Route::patch('/movies/updateLikeDislike/{movie}', 'Api\MovieController@updateLikeDislike');
+Route::get('/movies/{movie}/comments', 'Api\MovieController@getCommentsForMovie');
 
 Route::get('/genres', 'GenreController@index');
+
+Route::apiResource('comments', 'CommentController');
+
+Route::apiResource('watchlists', 'WatchlistController');
+Route::delete('watchlists/{watchlist}/movies/{movie}', 'WatchlistController@destroyMovieFromWatchlist');
+Route::patch('/movies/{movie}/watched', 'Api\MovieController@markAsWatchedUnwatched');

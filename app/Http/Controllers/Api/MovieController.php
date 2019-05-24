@@ -46,10 +46,16 @@ class MovieController extends Controller
         views($movie)->record();
 
         $movie->update([
-            'timesVisited' => $movie->timesVisited+1
+            'times_visited' => $movie->times_visited+1
         ]);
 
-        return $movie;
+        return $movie->load('comments');
+    }
+
+    public function getCommentsForMovie(Movie $movie){
+
+        return $movie->comments;
+
     }
 
     public function update(Request $request, Movie $movie){
@@ -94,5 +100,20 @@ class MovieController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function markAsWatchedUnwatched(Movie $movie){
+
+        $ids = $movie->watchlists()->allRelatedIds();
+
+        foreach ($ids as $id){
+            if ($movie->isWatched) {
+                $movie->watchlists()->updateExistingPivot($id, ['watched' => false]);
+            }else{
+                $movie->watchlists()->updateExistingPivot($id, ['watched' => true]);
+            }
+        }
+
+        return $movie;
     }
 }
