@@ -10,7 +10,8 @@ class Comment extends Model
         'author', 'comment', 'movie_id'
     ];
 
-    public function movie(){
+    public function movie()
+    {
 
         return $this->belongsTo(Movie::class);
 

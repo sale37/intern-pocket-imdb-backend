@@ -17,33 +17,38 @@ class Movie extends Model implements ViewableContract
 
     protected $appends = ['is_watched'];
 
-    public function users(){
+    public function users()
+    {
 
         return $this->belongsToMany('App\User', 'movies_users', 'movies_id', 'user_id');
 
     }
 
-    public function comments(){
+    public function comments()
+    {
 
         return $this->hasMany(Comment::class);
 
     }
 
-    public function watchlists(){
+    public function watchlists()
+    {
 
         return $this->belongsToMany('App\Watchlist', 'watchlist_movie', 'movie_id', 'watchlist_id')->withPivot('watched');
 
     }
 
-    public function getIsWatchedAttribute(){
+    public function getIsWatchedAttribute()
+    {
 
         foreach ($this->watchlists as $watchlsit)
 
-        return $watchlsit->pivot->watched;
+            return $watchlsit->pivot->watched;
 
     }
 
-    public function genre(){
+    public function genre()
+    {
 
         return $this->belongsTo(Genre::class);
 

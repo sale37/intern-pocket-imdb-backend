@@ -9,7 +9,8 @@ class Genre extends Model
     public $timestamps = false;
 
 
-    public function movies(){
+    public function movies()
+    {
 
         return $this->hasMany(Movie::class);
 

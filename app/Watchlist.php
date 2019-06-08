@@ -10,13 +10,15 @@ class Watchlist extends Model
         'user_id', 'name'
     ];
 
-    public function user(){
+    public function user()
+    {
 
         $this->belongsTo(User::class);
 
     }
 
-    public function movies(){
+    public function movies()
+    {
 
         return $this->belongsToMany('App\Movie', 'watchlist_movie', 'watchlist_id', 'movie_id')->withPivot('watched');
 

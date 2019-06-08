@@ -35,7 +35,7 @@ class WatchlistController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -55,16 +55,16 @@ class WatchlistController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Watchlist  $watchlist
+     * @param \App\Watchlist $watchlist
      * @return \Illuminate\Http\Response
      */
     public function show(Watchlist $watchlist)
     {
         $user = auth()->user();
 
-        if(auth()->id() == $watchlist->user_id) {
+        if (auth()->id() == $watchlist->user_id) {
             return $user->watchlists->find($watchlist->id)->load('movies');
-        }else{
+        } else {
             throw new UnauthorizedException('Cant access this watchlist');
         }
     }
@@ -72,7 +72,7 @@ class WatchlistController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Watchlist  $watchlist
+     * @param \App\Watchlist $watchlist
      * @return \Illuminate\Http\Response
      */
     public function edit(Watchlist $watchlist)
@@ -83,8 +83,8 @@ class WatchlistController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Watchlist  $watchlist
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Watchlist $watchlist
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Watchlist $watchlist)
@@ -92,13 +92,13 @@ class WatchlistController extends Controller
 
         $movieId = $request->id;
 
-        if(auth()->id() == $watchlist->user_id) {
+        if (auth()->id() == $watchlist->user_id) {
             if (!$watchlist->movies()->find($movieId)) {
                 $watchlist->movies()->attach($movieId);
-            }else{
+            } else {
                 throw new ValidationException('Movie already in watchlist');
             }
-        }else{
+        } else {
             throw new UnauthorizedException('Cant access this watchlist');
         }
     }
@@ -106,7 +106,7 @@ class WatchlistController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Watchlist  $watchlist
+     * @param \App\Watchlist $watchlist
      * @return \Illuminate\Http\Response
      */
     public function destroy(Watchlist $watchlist)
@@ -116,12 +116,13 @@ class WatchlistController extends Controller
         return $watchlist;
     }
 
-    public function destroyMovieFromWatchlist(Watchlist $watchlist, Movie $movie){
+    public function destroyMovieFromWatchlist(Watchlist $watchlist, Movie $movie)
+    {
 
 
-        if(auth()->id() == $watchlist->user_id) {
-                $watchlist->movies()->detach($movie->id);
-        }else{
+        if (auth()->id() == $watchlist->user_id) {
+            $watchlist->movies()->detach($movie->id);
+        } else {
             throw new UnauthorizedException('Cant remove from this watchlist');
         }
     }

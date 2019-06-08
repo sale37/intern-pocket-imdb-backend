@@ -29,7 +29,7 @@ class User extends Authenticatable implements JWTSubject
         'password', 'remember_token',
     ];
 
-        /**
+    /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
      * @return mixed
@@ -50,13 +50,15 @@ class User extends Authenticatable implements JWTSubject
     }
 
 
-    public function movies(){
+    public function movies()
+    {
 
         return $this->belongsToMany('App\Movie', 'movies_users', 'user_id', 'movie_id');
 
     }
 
-    public function watchlists(){
+    public function watchlists()
+    {
 
         return $this->hasMany(Watchlist::class);
 
